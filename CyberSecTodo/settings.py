@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'todo.apps.TodoConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +51,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'CyberSecTodo.urls'
+SESSION_ENGINE = 'CyberSecTodo.simplesession'
 
 TEMPLATES = [
     {
@@ -68,6 +70,10 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'CyberSecTodo.wsgi.application'
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+SESSION_COOKIE_SAMESITE = None
 
 
 # Database

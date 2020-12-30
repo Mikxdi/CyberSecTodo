@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+			<title>To-Do</title>
+	</head>
+
+	<body>
+		<h1>Your todos</h1>
+
+		<table>
+			<tr>
+			<th style="text-align:left">Username: <td>{{user.username}}
+		</table>
+
+		<form action='logout/' method="POST">
+			{% csrf_token %}
+			<input type="submit" value="Logout"/>
+		</form>
+		
+		<h2>Your todos</h2>
+		
+		<h3>Create new Todo</h3>
+		<form method="GET" action="/add_todo/">
+
+			<label for="name">Name:</label><br>
+			<input type="text" name="todo_name"/><br>
+			<label for="text">desciption:</label><br>
+			<input type="text" name="todo_description"/><br><br>
+			<input type="submit" name="Add"/>
+		</form>
+		
+		<br>
+
+			<ul>
+				{% for todo in todos %}
+					<b>{{ todo.name|safe }}</b>
+					<p>Description: {{ todo.description|safe}}</p>
+					<p>Status: {{todo.done}}</p>
+					<form method = "GET" action="/mark_done/">
+						<input type="hidden" name="todo_name" value="{{todo.name}}" />
+						<input type="submit" name="Done"/>
+					</form>
+				{% endfor %}
+			</ul>
+		
+		<br>
+
+		<form method="POST" action="/del_todo/">
+			{% csrf_token %}
+			<label for="name">Delete By name:</label><br>
+			<input type="text" name="todo_name"/><br>
+			<input type="submit" name="Del"/>
+		</form>
+	</body>
+</html>
